@@ -35,35 +35,33 @@
         <div class="jumbotron">
             <h1 class="text-center">Rock Paper Scissors Multiplayer</h1>
         </div>
-        <div class="row startGame">
-            <form id="inputForm">
-                <div class="form-group">
-                    <input type="text" class="form-control" id="inputName" required autofocus>
-                </div>
-                <div class="col col-12">
-                    <div class="btn-group" role="group">
-                        <button type="button" id="btn-name" class="btn btn-primary">
-                            <span class="glyphicon glyphicon-search"></span> Submit</button>
-                    </div>
-                </div>
-            </form>
-        </div>
+        <form id="inputForm">
+            <div class="input-group startGame">
+                <input type="text" class="form-control" id="inputName" required>
+                <span class="input-group-btn">
+                    <button type="button" id="btn-name" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-search"></span>Submit</button>
+                </span>
+            </div>
+        </form>
         <div class="row game">
             <div class="col col-3 text-center">
                 <div class="p1Name">name</div>
                 <div class="rock">ROCK</div>
                 <div class="paper">PAPER</div>
-                <div class="scissor">SCISSORS</div>
+                <div class="scissors">SCISSORS</div>
                 <div class="p1WinLoss">WINS: 0, LOSSES: 0</div>
             </div>
             <div class="col col-3 text-center">
-                <div class="prompt">shit goes here</div>
+                <div class="prompt1">shit goes here</div>
+                <div class="prompt3">shit goes here</div>
+                <div class="prompt2">shit goes here</div>                
             </div>
             <div class="col col-3 text-center">
                 <div class="p2Name">name</div>
-                <div class="rock">ROCK</div>
-                <div class="paper">PAPER</div>
-                <div class="scissor">SCISSORS</div>
+                <div class="rock2">ROCK</div>
+                <div class="paper2">PAPER</div>
+                <div class="scissors2">SCISSORS</div>
                 <div class="p2WinLoss">WINS: 0, LOSSES: 0</div>
             </div>
         </div>

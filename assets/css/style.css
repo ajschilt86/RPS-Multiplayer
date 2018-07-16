@@ -3,8 +3,12 @@
 }
 
 .startGame {
-    margin-bottom: 15px;
-    
+    margin-bottom: 15px;    
+}
+
+#inputName {
+    width: 300px;
+    margin: auto;
 }
 /* .game {
     background-color: lightblue;
@@ -19,11 +23,22 @@
     margin-bottom: 85px;
 }
 
-.rock, .paper, .scissor {
+.rock, .paper, .scissors {
     font-size: 35px;
 }
 
-.rock:hover, .paper:hover, .scissor:hover {
+.rock2, .paper2, .scissors2 {
+    font-size: 35px;
+}
+
+.rock:hover, .paper:hover, .scissors:hover {
+    background: rgba(57, 91, 243, 0.904);
+    transform: translateY(-5px);
+    animation: all .2s;
+    box-shadow: 1px 1px 35px black;
+}
+
+.rock2:hover, .paper2:hover, .scissors2:hover {
     background: rgba(57, 91, 243, 0.904);
     transform: translateY(-5px);
     animation: all .2s;
