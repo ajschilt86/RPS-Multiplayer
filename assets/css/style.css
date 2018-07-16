@@ -1,0 +1,62 @@
+.jumbotron {
+    background-color: lightblue;
+}
+
+.startGame {
+    margin-bottom: 15px;
+    
+}
+/* .game {
+    background-color: lightblue;
+    margin-bottom: 15px;
+} */
+
+
+.col-3 {
+    background-color: lightblue;
+    margin: 0 auto;
+    height: 250px;
+    margin-bottom: 85px;
+}
+
+.rock, .paper, .scissor {
+    font-size: 35px;
+}
+
+.rock:hover, .paper:hover, .scissor:hover {
+    background: rgba(57, 91, 243, 0.904);
+    transform: translateY(-5px);
+    animation: all .2s;
+    box-shadow: 1px 1px 35px black;
+}
+
+.p1Name, .p2Name {
+    margin-bottom: 10px;
+    font-size: 25px;
+}
+
+.p1WinLoss, .p2WinLoss {
+    position: absolute;
+    right: 27%;
+    bottom: 5%;
+}
+
+
+
+
+
+.col-7 {
+    background-color: yellow;
+    margin: 0 auto;
+    height: 150px;
+}
+
+.col-4 {
+    background-color: grey;
+    margin: 0 auto;
+}
+
+.chatArea {
+    height: 150px;
+    width: 100%;
+}
