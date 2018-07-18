@@ -1,13 +1,6 @@
 var player1 = false;
 var player2 = false;
 
-$(".p1ChoiceRock").hide();
-$(".p2ChoiceRock").hide();
-$(".p1ChoicePaper").hide();
-$(".p2ChoicePaper").hide();
-$(".p1ChoiceScissors").hide();
-$(".p2ChoiceScissors").hide();
-
 // Initialize Firebase
 var config = {
     apiKey: "AIzaSyDDhlNY_eKOHEFbnShvaW_-6oaX-Xi8fMQ",
@@ -155,44 +148,53 @@ function results() {
     if (player1Choice === "rock" && player2Choice === "rock") {
         tie++;
         renderWLT();
+        setTimeout(function() { handHide(); }, 2000);
     } else if (player1Choice === "rock" && player2Choice === "paper") {
         player1Losses++;
         player2Wins++;
         renderWLT();
+        setTimeout(function() { handHide(); }, 2000);
     } else if (player1Choice === "rock" && player2Choice === "scissors") {
         player2Losses++;
         player1Wins++;
         renderWLT();
+        setTimeout(function() { handHide(); }, 2000);
     }
     // player one choses paper
     if (player1Choice === "paper" && player2Choice === "paper") {
         tie++;
         renderWLT();
+        setTimeout(function() { handHide(); }, 2000);
     }
     if (player1Choice === "paper" && player2Choice === "scissors") {
         player1Losses++;
         player2Wins++;
         renderWLT();
+        setTimeout(function() { handHide(); }, 2000);
     }
     if (player1Choice === "paper" && player2Choice === "rock") {
         player2Losses++;
         player1Wins++;
         renderWLT();
+        setTimeout(function() { handHide(); }, 2000);
     }
     // player one choses scissors
     if (player1Choice === "scissors" && player2Choice === "scissors") {
         tie++;
         renderWLT();
+        setTimeout(function() { handHide(); }, 2000);
     }
     if (player1Choice === "scissors" && player2Choice === "rock") {
         player1Losses++;
         player2Wins++;
         renderWLT();
+        setTimeout(function() { handHide(); }, 2000);
     }
     if (player1Choice === "scissors" && player2Choice === "paper") {
         player2Losses++;
         player1Wins++;
         renderWLT();
+        setTimeout(function() { handHide(); }, 2000);
     }
 }
 //function that renders wins and losses
@@ -207,11 +209,33 @@ function hide() {
     $(".scissors").hide();
 }
 
+function show() {
+    $(".rock").show();
+    $(".paper").show();
+    $(".scissors").show();
+    $(".rock2").show();
+    $(".paper2").show();
+    $(".scissors2").show();
+}
+
 function hide2() {
     $(".rock2").hide();
     $(".paper2").hide();
     $(".scissors2").hide();
 }
+
+function handHide() {
+    $(".p1ChoiceRock").hide();
+    $(".p2ChoiceRock").hide();
+    $(".p1ChoicePaper").hide();
+    $(".p2ChoicePaper").hide();
+    $(".p1ChoiceScissors").hide();
+    $(".p2ChoiceScissors").hide();
+    show();
+}
+
+handHide();
+
 
 // Konami Code
 if (window.addEventListener) {
