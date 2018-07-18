@@ -50,11 +50,11 @@
     font-size: 25px;
 }
 
-/* .p1WinLoss, .p2WinLoss {
+.p1WinLoss, .p2WinLoss {
     position: absolute;
     right: 14%;
     bottom: 5%;
-} */
+}
 
 .prompt1, .prompt2, {
     margin-bottom: 15px;

@@ -1,6 +1,13 @@
 var player1 = false;
 var player2 = false;
 
+$(".p1ChoiceRock").hide();
+$(".p2ChoiceRock").hide();
+$(".p1ChoicePaper").hide();
+$(".p2ChoicePaper").hide();
+$(".p1ChoiceScissors").hide();
+$(".p2ChoiceScissors").hide();
+
 // Initialize Firebase
 var config = {
     apiKey: "AIzaSyDDhlNY_eKOHEFbnShvaW_-6oaX-Xi8fMQ",
@@ -95,30 +102,42 @@ function game() {
     if (player1Choice === false) {
         $(".rock").click(function () {
             player1Choice = "rock";
-            $(".prompt1").html("<p> player one chose " + player1Choice);
+            hide();
+            $(".p1ChoiceRock").show();
+            $(".prompt1").append("<p> player one chose " + player1Choice);
         });
         $(".paper").click(function () {
             player1Choice = "paper";
+            hide();
+            $(".p1ChoicePaper").show();
             $(".prompt1").html("<p> player one chose " + player1Choice);
         });
         $(".scissors").click(function () {
             player1Choice = "scissors"
+            hide();
+            $(".p1ChoiceScissors").show();
             $(".prompt1").html("<p> player one chose " + player1Choice);
         });
     }
     if (player2Choice === false) {
         $(".rock2").click(function () {
             player2Choice = "rock";
+            hide2();
+            $(".p2ChoiceRock").show();
             $(".prompt2").html("<p> player two chose " + player2Choice);
             results();
         });
         $(".paper2").click(function () {
             player2Choice = "paper";
+            hide2();
+            $(".p2ChoicePaper").show();
             $(".prompt2").html("<p> player two chose " + player2Choice);
             results();
         });
         $(".scissors2").click(function () {
             player2Choice = "scissors";
+            hide2();
+            $(".p2ChoiceScissors").show();
             $(".prompt2").html("<p> player two chose " + player2Choice);
             results();
         });
@@ -182,6 +201,18 @@ function renderWLT() {
     $(".p2WinLoss").html("<div>WINS: " + player2Wins + ", LOSSES: " + player2Losses + ", TIES: " + tie + "</div>");
 }
 
+function hide() {
+    $(".rock").hide();
+    $(".paper").hide();
+    $(".scissors").hide();
+}
+
+function hide2() {
+    $(".rock2").hide();
+    $(".paper2").hide();
+    $(".scissors2").hide();
+}
+
 // Konami Code
 if (window.addEventListener) {
     var state = 0, konami = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
@@ -189,7 +220,7 @@ if (window.addEventListener) {
         if (e.keyCode == konami[state]) state++;
         else state = 0;
         if (state == 10)
-            $("body").css("background", "orange");
+            $("body").css("background", "linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet)");
     }, true);
 }
 
