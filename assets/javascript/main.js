@@ -1,4 +1,3 @@
-
 var player1 = false;
 var player2 = false;
 
@@ -41,7 +40,7 @@ $("#btn-name").click(function () {
         });
         game();
     }
-
+    //form clear, the complicated way!
     var addName = $(".form-control").val().trim();
     if (addName === "") {
         return false;
@@ -49,9 +48,6 @@ $("#btn-name").click(function () {
     else {
         document.forms["inputForm"].reset();
     }
-
-
-
 });
 
 $(document).keydown(function (e) {
@@ -83,7 +79,6 @@ $(document).keydown(function (e) {
             });
             game();
         }
-
         var addName = $(".form-control").val().trim();
         if (addName === "") {
             return false;
@@ -93,7 +88,6 @@ $(document).keydown(function (e) {
         }
     }
 });
-
 var player1Choice = false;
 var player2Choice = false;
 
@@ -130,15 +124,14 @@ function game() {
         });
     }
 }
-
 var player1Wins = 0;
 var player1Losses = 0;
 var player2Wins = 0;
 var player2Losses = 0;
 var tie = 0;
-
+//function that runs win/loss conditions
 function results() {
-    
+
     // player one choses rock
     if (player1Choice === "rock" && player2Choice === "rock") {
         tie++;
@@ -146,14 +139,13 @@ function results() {
     } else if (player1Choice === "rock" && player2Choice === "paper") {
         player1Losses++;
         player2Wins++;
-        renderWLT();        
+        renderWLT();
     } else if (player1Choice === "rock" && player2Choice === "scissors") {
         player2Losses++;
         player1Wins++;
         renderWLT();
     }
-
-   // player one choses paper
+    // player one choses paper
     if (player1Choice === "paper" && player2Choice === "paper") {
         tie++;
         renderWLT();
@@ -168,7 +160,6 @@ function results() {
         player1Wins++;
         renderWLT();
     }
-
     // player one choses scissors
     if (player1Choice === "scissors" && player2Choice === "scissors") {
         tie++;
@@ -185,15 +176,22 @@ function results() {
         renderWLT();
     }
 }
-
+//function that renders wins and losses
 function renderWLT() {
     $(".p1WinLoss").html("<div>WINS: " + player1Wins + ", LOSSES: " + player1Losses + ", TIES: " + tie + "</div>");
     $(".p2WinLoss").html("<div>WINS: " + player2Wins + ", LOSSES: " + player2Losses + ", TIES: " + tie + "</div>");
-
 }
 
-
-
+// Konami Code
+if (window.addEventListener) {
+    var state = 0, konami = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
+    window.addEventListener("keydown", function (e) {
+        if (e.keyCode == konami[state]) state++;
+        else state = 0;
+        if (state == 10)
+            $("body").css("background", "orange");
+    }, true);
+}
 
 
 
