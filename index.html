@@ -30,14 +30,13 @@
 </head>
 
 <body>
-
     <div class="container">
         <div class="jumbotron">
             <h1 class="text-center">Rock Paper Scissors Multiplayer</h1>
         </div>
         <form id="inputForm">
             <div class="input-group startGame">
-                <input type="text" class="form-control" id="inputName" required>
+                <input type="text" class="form-control" id="inputName" required autofocus>
                 <span class="input-group-btn">
                     <button type="button" id="btn-name" class="btn btn-primary">
                         <span class="glyphicon glyphicon-search"></span>Submit</button>
@@ -62,7 +61,7 @@
                 <div class="rock2">ROCK</div>
                 <div class="paper2">PAPER</div>
                 <div class="scissors2">SCISSORS</div>
-                <div class="p2WinLoss">WINS: 0, LOSSES: 0</div>
+                <div class="p2WinLoss">WINS: 0, LOSSES: 0, TIES: 0</div>
             </div>
         </div>
         <div class="row chat">

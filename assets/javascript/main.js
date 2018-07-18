@@ -2,8 +2,6 @@
 var player1 = false;
 var player2 = false;
 
-
-
 // Initialize Firebase
 var config = {
     apiKey: "AIzaSyDDhlNY_eKOHEFbnShvaW_-6oaX-Xi8fMQ",
@@ -102,12 +100,11 @@ var player2Choice = false;
 function game() {
     if (player1Choice === false) {
         $(".rock").click(function () {
-            player1Choice = "rock"
+            player1Choice = "rock";
             $(".prompt1").html("<p> player one chose " + player1Choice);
-            return false;
         });
         $(".paper").click(function () {
-            player1Choice = "paper"
+            player1Choice = "paper";
             $(".prompt1").html("<p> player one chose " + player1Choice);
         });
         $(".scissors").click(function () {
@@ -117,25 +114,83 @@ function game() {
     }
     if (player2Choice === false) {
         $(".rock2").click(function () {
-            player2Choice = "rock"
+            player2Choice = "rock";
             $(".prompt2").html("<p> player two chose " + player2Choice);
+            results();
         });
         $(".paper2").click(function () {
-            player2Choice = "paper"
+            player2Choice = "paper";
             $(".prompt2").html("<p> player two chose " + player2Choice);
+            results();
         });
         $(".scissors2").click(function () {
-            player2Choice = "scissors"
+            player2Choice = "scissors";
             $(".prompt2").html("<p> player two chose " + player2Choice);
+            results();
         });
-
-        console.log(player1Choice);
     }
 }
 
+var player1Wins = 0;
+var player1Losses = 0;
+var player2Wins = 0;
+var player2Losses = 0;
+var tie = 0;
 
+function results() {
+    
+    // player one choses rock
+    if (player1Choice === "rock" && player2Choice === "rock") {
+        tie++;
+        renderWLT();
+    } else if (player1Choice === "rock" && player2Choice === "paper") {
+        player1Losses++;
+        player2Wins++;
+        renderWLT();        
+    } else if (player1Choice === "rock" && player2Choice === "scissors") {
+        player2Losses++;
+        player1Wins++;
+        renderWLT();
+    }
 
+   // player one choses paper
+    if (player1Choice === "paper" && player2Choice === "paper") {
+        tie++;
+        renderWLT();
+    }
+    if (player1Choice === "paper" && player2Choice === "scissors") {
+        player1Losses++;
+        player2Wins++;
+        renderWLT();
+    }
+    if (player1Choice === "paper" && player2Choice === "rock") {
+        player2Losses++;
+        player1Wins++;
+        renderWLT();
+    }
 
+    // player one choses scissors
+    if (player1Choice === "scissors" && player2Choice === "scissors") {
+        tie++;
+        renderWLT();
+    }
+    if (player1Choice === "scissors" && player2Choice === "rock") {
+        player1Losses++;
+        player2Wins++;
+        renderWLT();
+    }
+    if (player1Choice === "scissors" && player2Choice === "paper") {
+        player2Losses++;
+        player1Wins++;
+        renderWLT();
+    }
+}
+
+function renderWLT() {
+    $(".p1WinLoss").html("<div>WINS: " + player1Wins + ", LOSSES: " + player1Losses + ", TIES: " + tie + "</div>");
+    $(".p2WinLoss").html("<div>WINS: " + player2Wins + ", LOSSES: " + player2Losses + ", TIES: " + tie + "</div>");
+
+}
 
 
 
