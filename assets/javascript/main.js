@@ -1,5 +1,9 @@
 var player1 = false;
 var player2 = false;
+var player1Connected = true;
+var player2Connected = true;
+var player1Name = "";
+var player2Name = "";
 
 // Initialize Firebase
 var config = {
@@ -18,26 +22,32 @@ $("#btn-name").click(function () {
     event.preventDefault();
 
     if (player1 === false) {
-        player1 = $("#inputName").val().trim();
+        player1Name = $("#inputName").val().trim();
 
         database.ref("connections/player1").set({
-            player1: player1
+            player1: player1Name,
+            player1Connected: player1Connected
         });
 
         database.ref().on("value", function (snapshot) {
             $(".p1Name").html("<p>" + snapshot.val().connections.player1.player1 + "</p>");
+            $(".chatArea").prepend("<div>" + snapshot.val().connections.player1.player1 + " has connected</div>");
         });
+        player1 = true;
 
     } else if (player2 === false) {
-        player2 = $("#inputName").val().trim();
+        player2Name= $("#inputName").val().trim();
 
         database.ref("connections/player2").set({
-            player2: player2
+            player2: player2Name,
+            player2Connected: player2Connected
         });
 
         database.ref().on("value", function (snapshot) {
             $(".p2Name").html("<p>" + snapshot.val().connections.player2.player2 + "</p>");
+            $(".chatArea").prepend("<div>" + snapshot.val().connections.player2.player2 + " has connected</div>");
         });
+        player2 = true;
         game();
     }
     $(".form-control").val("");
@@ -231,8 +241,6 @@ handHide();
 var name = "";
 var chat = "";
 
-
-
 // Click Button changes what is stored in firebase
 $("#btn-chat").on("click", function (event) {
     // Prevent the chat from refreshing
@@ -257,8 +265,6 @@ $(document).keydown(function (e) {
     var key_one = 13;
 
     if (e.keyCode == key_one) {
-        event.preventDefault();
-
         // Prevent the chat from refreshing
         event.preventDefault();
 
@@ -277,7 +283,6 @@ $(document).keydown(function (e) {
         $(".form-control1").val("");
     }
 });
-
 
 // Firebase is always watching for changes to the data.
 // When changes occurs it will print them to console and html
