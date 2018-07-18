@@ -26,7 +26,8 @@
     <!-- Moment JS -->
     <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ"
+        crossorigin="anonymous">
 
     <title>Rock Paper Scissors Multiplayer</title>
 </head>
@@ -47,41 +48,55 @@
         </form>
         <div class="row game">
             <div class="col col-3 text-center">
-                <div class="p1Name">name</div>
+                <div class="p1Name">Player1</div>
                 <div class="rock">ROCK</div>
-                <div class="p1ChoiceRock"><i class="far fa-9x fa-hand-rock"></i></div> 
+                <div class="p1ChoiceRock">
+                    <i class="far fa-9x fa-hand-rock"></i>
+                </div>
                 <div class="paper">PAPER</div>
-                <div class="p1ChoicePaper"><i class="far fa-9x fa-hand-paper"></i></div> 
+                <div class="p1ChoicePaper">
+                    <i class="far fa-9x fa-hand-paper"></i>
+                </div>
                 <div class="scissors">SCISSORS</div>
-                <div class="p1ChoiceScissors"><i class="far fa-9x fa-hand-peace"></i></div> 
+                <div class="p1ChoiceScissors">
+                    <i class="far fa-9x fa-hand-peace"></i>
+                </div>
                 <div class="p1WinLoss">WINS: 0, LOSSES: 0, TIES: 0</div>
             </div>
             <div class="col col-3 text-center">
                 <div class="prompt1">shit goes here</div>
                 <div class="prompt3">shit goes here</div>
-                <div class="prompt2">shit goes here</div>                
+                <div class="prompt2">shit goes here</div>
             </div>
             <div class="col col-3 text-center">
-                <div class="p2Name">name</div>
+                <div class="p2Name">Player2</div>
                 <div class="rock2">ROCK</div>
-                <div class="p2ChoiceRock"><i class="far fa-9x fa-hand-rock"></i></div> 
+                <div class="p2ChoiceRock">
+                    <i class="far fa-9x fa-hand-rock"></i>
+                </div>
                 <div class="paper2">PAPER</div>
-                <div class="p2ChoicePaper"><i class="far fa-9x fa-hand-paper"></i></div> 
+                <div class="p2ChoicePaper">
+                    <i class="far fa-9x fa-hand-paper"></i>
+                </div>
                 <div class="scissors2">SCISSORS</div>
-                <div class="p2ChoiceScissors"><i class="far fa-9x fa-hand-peace"></i></div> 
+                <div class="p2ChoiceScissors">
+                    <i class="far fa-9x fa-hand-peace"></i>
+                </div>
                 <div class="p2WinLoss">WINS: 0, LOSSES: 0, TIES: 0</div>
             </div>
         </div>
         <div class="row chat">
             <div class="col col-7">
-                <textarea class="chatArea"></textarea>
+                <div class="chatArea"></div>
             </div>
-            <div class="col col-4">
-                <input type="text" class="form-control" id="chat" required>
-                <div class="btn-group" role="group">
-                    <button type="button" id="btn-chat" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-search"></span> Submit</button>
-                </div>
+            <div class="col col-4 text-center">
+                <form id="inputForm inputForm1">
+                    <input type="text" class="form-control form-control1" id="chatInput" required>
+                    <div class="btn-group" role="group">
+                        <button type="button" id="btn-chat" class="btn btn-primary btn1">
+                            <span class="glyphicon glyphicon-search"></span> Submit</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

@@ -60,13 +60,10 @@
     margin-bottom: 15px;
 }
 
-
-
-
 .col-7 {
     background-color: yellow;
     margin: 0 auto;
-    height: 150px;
+    height: 250px;
 }
 
 .col-4 {
@@ -75,6 +72,19 @@
 }
 
 .chatArea {
-    height: 150px;
+    overflow-y: scroll;
+    height: 250px;
     width: 100%;
 }
+
+/* .form-control1, .btn1 {
+    position: absolute;
+    top: 30%;
+    left: 0%;
+}
+
+#btn-chat {
+    position: absolute;
+    top: 30%;
+    left: 0%;
+} */

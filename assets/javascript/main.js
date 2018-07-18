@@ -40,14 +40,7 @@ $("#btn-name").click(function () {
         });
         game();
     }
-    //form clear, the complicated way!
-    var addName = $(".form-control").val().trim();
-    if (addName === "") {
-        return false;
-    }
-    else {
-        document.forms["inputForm"].reset();
-    }
+    $(".form-control").val("");
 });
 
 $(document).keydown(function (e) {
@@ -79,13 +72,7 @@ $(document).keydown(function (e) {
             });
             game();
         }
-        var addName = $(".form-control").val().trim();
-        if (addName === "") {
-            return false;
-        }
-        else {
-            document.forms["inputForm"].reset();
-        }
+        $(".form-control").val("");
     }
 });
 var player1Choice = false;
@@ -148,53 +135,53 @@ function results() {
     if (player1Choice === "rock" && player2Choice === "rock") {
         tie++;
         renderWLT();
-        setTimeout(function() { handHide(); }, 2000);
+        setTimeout(function () { handHide(); }, 2000);
     } else if (player1Choice === "rock" && player2Choice === "paper") {
         player1Losses++;
         player2Wins++;
         renderWLT();
-        setTimeout(function() { handHide(); }, 2000);
+        setTimeout(function () { handHide(); }, 2000);
     } else if (player1Choice === "rock" && player2Choice === "scissors") {
         player2Losses++;
         player1Wins++;
         renderWLT();
-        setTimeout(function() { handHide(); }, 2000);
+        setTimeout(function () { handHide(); }, 2000);
     }
     // player one choses paper
     if (player1Choice === "paper" && player2Choice === "paper") {
         tie++;
         renderWLT();
-        setTimeout(function() { handHide(); }, 2000);
+        setTimeout(function () { handHide(); }, 2000);
     }
     if (player1Choice === "paper" && player2Choice === "scissors") {
         player1Losses++;
         player2Wins++;
         renderWLT();
-        setTimeout(function() { handHide(); }, 2000);
+        setTimeout(function () { handHide(); }, 2000);
     }
     if (player1Choice === "paper" && player2Choice === "rock") {
         player2Losses++;
         player1Wins++;
         renderWLT();
-        setTimeout(function() { handHide(); }, 2000);
+        setTimeout(function () { handHide(); }, 2000);
     }
     // player one choses scissors
     if (player1Choice === "scissors" && player2Choice === "scissors") {
         tie++;
         renderWLT();
-        setTimeout(function() { handHide(); }, 2000);
+        setTimeout(function () { handHide(); }, 2000);
     }
     if (player1Choice === "scissors" && player2Choice === "rock") {
         player1Losses++;
         player2Wins++;
         renderWLT();
-        setTimeout(function() { handHide(); }, 2000);
+        setTimeout(function () { handHide(); }, 2000);
     }
     if (player1Choice === "scissors" && player2Choice === "paper") {
         player2Losses++;
         player1Wins++;
         renderWLT();
-        setTimeout(function() { handHide(); }, 2000);
+        setTimeout(function () { handHide(); }, 2000);
     }
 }
 //function that renders wins and losses
@@ -231,10 +218,99 @@ function handHide() {
     $(".p2ChoicePaper").hide();
     $(".p1ChoiceScissors").hide();
     $(".p2ChoiceScissors").hide();
+    $(".prompt1").empty();
+    $(".prompt2").empty();
+    $(".prompt3").empty();
     show();
 }
 
 handHide();
+
+//////CHAT//////
+
+var name = "";
+var chat = "";
+
+
+
+// Click Button changes what is stored in firebase
+$("#btn-chat").on("click", function (event) {
+    // Prevent the chat from refreshing
+    event.preventDefault();
+
+    // Get inputs
+    name = player1;
+    chat = $("#chatInput").val().trim();
+
+    localStorage.setItem("name", name);
+
+    // Change what is saved in firebase
+    database.ref("/chat").push({
+        name: name,
+        chat: chat,
+    });
+
+    $(".form-control1").val("");
+});
+
+$(document).keydown(function (e) {
+    var key_one = 13;
+
+    if (e.keyCode == key_one) {
+        event.preventDefault();
+
+        // Prevent the chat from refreshing
+        event.preventDefault();
+
+        // Get inputs
+        name = player1;
+        chat = $("#chatInput").val().trim();
+
+        localStorage.setItem("name", name);
+
+        // Change what is saved in firebase
+        database.ref("/chat").push({
+            name: name,
+            chat: chat,
+        });
+
+        $(".form-control1").val("");
+    }
+});
+
+
+// Firebase is always watching for changes to the data.
+// When changes occurs it will print them to console and html
+database.ref("/chat").on("child_added", function (snapshot) {
+
+    // Print the initial data to the console.
+    console.log(snapshot.val());
+
+    // Log the value of the various properties
+    console.log(snapshot.val().name);
+    console.log(snapshot.val().chat);
+
+    // Change the HTML    
+    $(".chatArea").prepend("<div>" + snapshot.val().name + ": " + snapshot.val().chat + "</div>");
+
+    // If any errors are experienced, log them to console.
+}, function (errorObject) {
+    console.log("The read failed: " + errorObject.code);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // Konami Code
