@@ -36,7 +36,7 @@ $("#btn-name").click(function () {
         player1 = true;
 
     } else if (player2 === false) {
-        player2Name= $("#inputName").val().trim();
+        player2Name = $("#inputName").val().trim();
 
         database.ref("connections/player2").set({
             player2: player2Name,
@@ -85,6 +85,34 @@ $(document).keydown(function (e) {
         $(".form-control").val("");
     }
 });
+
+
+
+
+
+var connectionsRef = database.ref("/connections");
+var connectedRef = database.ref(".info/connected");
+
+connectedRef.on("value", function (snapshot) {
+    if (snapshot.val()) {
+        var con = connectionsRef.push(true);
+        con.onDisconnect().remove();
+        $(".chatArea").prepend("<div>" + snapshot.val().connections.player2.player2 + " has connected</div>");
+    }
+
+});
+
+connectionsRef.on("value", function (snapshot) {
+    $(".chatArea").prepend("<div>" + snapshot.val().connections.player2.player2 + " has connected</div>");
+});
+
+
+
+
+
+
+
+
 var player1Choice = false;
 var player2Choice = false;
 
@@ -145,52 +173,61 @@ function results() {
     if (player1Choice === "rock" && player2Choice === "rock") {
         tie++;
         renderWLT();
+        $(".prompt3").text("Tie!");
         setTimeout(function () { handHide(); }, 2000);
     } else if (player1Choice === "rock" && player2Choice === "paper") {
         player1Losses++;
         player2Wins++;
         renderWLT();
+        $(".prompt3").text("Player2 wins!");
         setTimeout(function () { handHide(); }, 2000);
     } else if (player1Choice === "rock" && player2Choice === "scissors") {
         player2Losses++;
         player1Wins++;
         renderWLT();
+        $(".prompt3").text("Player1 wins!");
         setTimeout(function () { handHide(); }, 2000);
     }
     // player one choses paper
     if (player1Choice === "paper" && player2Choice === "paper") {
         tie++;
         renderWLT();
+        $(".prompt3").text("Tie!");
         setTimeout(function () { handHide(); }, 2000);
     }
     if (player1Choice === "paper" && player2Choice === "scissors") {
         player1Losses++;
         player2Wins++;
         renderWLT();
+        $(".prompt3").text("Player2 wins!");
         setTimeout(function () { handHide(); }, 2000);
     }
     if (player1Choice === "paper" && player2Choice === "rock") {
         player2Losses++;
         player1Wins++;
         renderWLT();
+        $(".prompt3").text("Player1 wins!");
         setTimeout(function () { handHide(); }, 2000);
     }
     // player one choses scissors
     if (player1Choice === "scissors" && player2Choice === "scissors") {
         tie++;
         renderWLT();
+        $(".prompt3").text("Tie!");
         setTimeout(function () { handHide(); }, 2000);
     }
     if (player1Choice === "scissors" && player2Choice === "rock") {
         player1Losses++;
         player2Wins++;
         renderWLT();
+        $(".prompt3").text("Player2 wins!");
         setTimeout(function () { handHide(); }, 2000);
     }
     if (player1Choice === "scissors" && player2Choice === "paper") {
         player2Losses++;
         player1Wins++;
         renderWLT();
+        $(".prompt3").text("Player1 wins!");
         setTimeout(function () { handHide(); }, 2000);
     }
 }
