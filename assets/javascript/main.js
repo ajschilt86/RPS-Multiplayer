@@ -5,6 +5,10 @@ var player2Connected = true;
 var player1Name = "";
 var player2Name = "";
 
+
+
+
+
 function update1() {
     var connectedRef = firebase.database().ref(".info/connected");
     connectedRef.on("value", function (snap) {
