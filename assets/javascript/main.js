@@ -5,6 +5,35 @@ var player2Connected = true;
 var player1Name = "";
 var player2Name = "";
 
+function update1() {
+    var connectedRef = firebase.database().ref(".info/connected");
+    connectedRef.on("value", function (snap) {
+        if (snap.val() === true) {
+            $(".p1Name").html(player1Name);
+            $(".chatArea").prepend("<div>" + player1Name + " has connected</div");
+            player1 = true;
+        } else {
+            $(".chatArea").prepend("<div>" + player1Name + " has disconencted</div");
+        }
+    });
+}
+
+function update2() {
+    var connectedRef = firebase.database().ref(".info/connected");
+    connectedRef.on("value", function (snap) {
+        if (snap.val() === true) {
+            $(".p2Name").html(player2Name);
+            $(".chatArea").prepend("<div>" + player2Name + " has connected</div");
+            player2 = true;
+        } else {
+            $(".chatArea").prepend("<div>" + player2Name + " has disconencted</div");
+        }
+    });
+}
+
+
+
+
 // Initialize Firebase
 var config = {
     apiKey: "AIzaSyDDhlNY_eKOHEFbnShvaW_-6oaX-Xi8fMQ",
@@ -25,29 +54,18 @@ $("#btn-name").click(function () {
         player1Name = $("#inputName").val().trim();
 
         database.ref("connections/player1").set({
-            player1: player1Name,
-            player1Connected: player1Connected
+            player1: player1Name
         });
-
-        database.ref().on("value", function (snapshot) {
-            $(".p1Name").html("<p>" + snapshot.val().connections.player1.player1 + "</p>");
-            $(".chatArea").prepend("<div>" + snapshot.val().connections.player1.player1 + " has connected</div>");
-        });
-        player1 = true;
+        update1();
 
     } else if (player2 === false) {
         player2Name = $("#inputName").val().trim();
 
         database.ref("connections/player2").set({
-            player2: player2Name,
-            player2Connected: player2Connected
+            player2: player2Name
         });
 
-        database.ref().on("value", function (snapshot) {
-            $(".p2Name").html("<p>" + snapshot.val().connections.player2.player2 + "</p>");
-            $(".chatArea").prepend("<div>" + snapshot.val().connections.player2.player2 + " has connected</div>");
-        });
-        player2 = true;
+        update2();
         game();
     }
     $(".form-control").val("");
@@ -60,26 +78,21 @@ $(document).keydown(function (e) {
         event.preventDefault();
 
         if (player1 === false) {
-            player1 = $("#inputName").val().trim();
+            player1Name = $("#inputName").val().trim();
 
             database.ref("connections/player1").set({
-                player1: player1
+                player1: player1Name
             });
-
-            database.ref().on("value", function (snapshot) {
-                $(".p1Name").html("<p>" + snapshot.val().connections.player1.player1 + "</p>");
-            });
+            update1();
 
         } else if (player2 === false) {
-            player2 = $("#inputName").val().trim();
+            player2Name = $("#inputName").val().trim();
 
             database.ref("connections/player2").set({
-                player2: player2
+                player2: player2Name
             });
 
-            database.ref().on("value", function (snapshot) {
-                $(".p2Name").html("<p>" + snapshot.val().connections.player2.player2 + "</p>");
-            });
+            update2();
             game();
         }
         $(".form-control").val("");
@@ -278,35 +291,14 @@ handHide();
 var name = "";
 var chat = "";
 
-// Click Button changes what is stored in firebase
-$("#btn-chat").on("click", function (event) {
-    // Prevent the chat from refreshing
-    event.preventDefault();
-
-    // Get inputs
-    name = player1;
-    chat = $("#chatInput").val().trim();
-
-    localStorage.setItem("name", name);
-
-    // Change what is saved in firebase
-    database.ref("/chat").push({
-        name: name,
-        chat: chat,
-    });
-
-    $(".form-control1").val("");
-});
-
-$(document).keydown(function (e) {
-    var key_one = 13;
-
-    if (e.keyCode == key_one) {
+function chatbox() {
+    // Click Button changes what is stored in firebase
+    $("#btn-chat").on("click", function (event) {
         // Prevent the chat from refreshing
         event.preventDefault();
 
         // Get inputs
-        name = player1;
+        name = player1Name;
         chat = $("#chatInput").val().trim();
 
         localStorage.setItem("name", name);
@@ -318,27 +310,54 @@ $(document).keydown(function (e) {
         });
 
         $(".form-control1").val("");
-    }
-});
+    });
 
-// Firebase is always watching for changes to the data.
-// When changes occurs it will print them to console and html
-database.ref("/chat").on("child_added", function (snapshot) {
+    // $(document).keydown(function (e) {
+    //     var key_one = 13;
 
-    // Print the initial data to the console.
-    console.log(snapshot.val());
+    //     if (e.keyCode == key_one) {
+    //         // Prevent the chat from refreshing
+    //         event.preventDefault();
 
-    // Log the value of the various properties
-    console.log(snapshot.val().name);
-    console.log(snapshot.val().chat);
+    //         // Get inputs
+    //         name = player1Name;
+    //         chat = $("#chatInput").val().trim();
 
-    // Change the HTML    
-    $(".chatArea").prepend("<div>" + snapshot.val().name + ": " + snapshot.val().chat + "</div>");
+    //         localStorage.setItem("name", name);
 
-    // If any errors are experienced, log them to console.
-}, function (errorObject) {
-    console.log("The read failed: " + errorObject.code);
-});
+    //         // Change what is saved in firebase
+    //         database.ref("/chat").push({
+    //             name: name,
+    //             chat: chat,
+    //         });
+
+    //         $(".form-control1").val("");
+    //     }
+    // });
+
+    // Firebase is always watching for changes to the data.
+    // When changes occurs it will print them to console and html
+    database.ref("/chat").on("child_added", function (snapshot) {
+
+        // Print the initial data to the console.
+        console.log(snapshot.val());
+
+        // Log the value of the various properties
+        console.log(snapshot.val().name);
+        console.log(snapshot.val().chat);
+
+        // Change the HTML    
+        $(".chatArea").prepend("<div>" + snapshot.val().name + ": " + snapshot.val().chat + "</div>");
+
+        // If any errors are experienced, log them to console.
+    }, function (errorObject) {
+        console.log("The read failed: " + errorObject.code);
+    });
+}
+
+chatbox();
+
+
 
 
 
